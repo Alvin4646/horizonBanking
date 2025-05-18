@@ -15,7 +15,7 @@ const Home = async ({searchParams:{id,page}}:SearchParamProps) => {
     const accountsData=accounts?.data;
     const appwriteItemId=(id as string)|| accountsData[0]?.appwriteItemId;
     const account =await  getAccount(appwriteItemId);
-    console.log(accounts?.transactions);
+    console.log(account);
   return (
     <section className="home">
       <div className="home-content">
@@ -36,7 +36,7 @@ const Home = async ({searchParams:{id,page}}:SearchParamProps) => {
 
         <RecentTransactions
           accounts={accountsData}
-          transactions={accounts?.transactions}
+          transactions={account?.transactions}
           appwriteItemId={appwriteItemId}
           page={currentPage}
         />

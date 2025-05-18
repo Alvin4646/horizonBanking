@@ -1,0 +1,26 @@
+"use client";
+
+import { useState } from "react";
+import TransactionsTableWrapper from "@/components/TransactionsTableWrapper";
+import { Pagination } from "@/components/Pagination";
+
+const TransactionHistoryContent = ({ transactions, currentPage}: { transactions: Transaction[], currentPage:number }) => {
+    const [page, setPage] = useState(currentPage);
+    const rowsPerPage = 10;
+    const totalPages = Math.ceil(transactions.length / rowsPerPage);
+
+    const indexOfLastTransaction = page * rowsPerPage;
+    const indexOfFirstTransaction = indexOfLastTransaction - rowsPerPage;
+    const currentTransactions = transactions.slice(indexOfFirstTransaction, indexOfLastTransaction);
+    const handleChange = (newPage: number) => setPage(newPage);
+    return (
+        <>
+            <TransactionsTableWrapper transactions={currentTransactions} />
+
+                <Pagination totalPages={totalPages} page={page} onPageChange={handleChange} />
+
+        </>
+    );
+};
+
+export default TransactionHistoryContent;
